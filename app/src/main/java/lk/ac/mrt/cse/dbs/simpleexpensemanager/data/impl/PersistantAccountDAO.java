@@ -16,19 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersistantAccountDAO implements AccountDAO {
-
-
     private final DBHandler handler;
     private SQLiteDatabase db;
 
 
     public PersistantAccountDAO(Context context) {
-
         handler = new DBHandler(context);
     }
-
-
-
 
 
 
@@ -52,8 +46,7 @@ public class PersistantAccountDAO implements AccountDAO {
         List<String> accountNo = new ArrayList<String>();
 
         while(cursor.moveToNext()) {
-            String accountNum = cursor.getString(
-                    cursor.getColumnIndexOrThrow(ACCOUNT_NO));
+            String accountNum = cursor.getString(cursor.getColumnIndexOrThrow(ACCOUNT_NO));
             accountNo.add(accountNum);
         }
         cursor.close();

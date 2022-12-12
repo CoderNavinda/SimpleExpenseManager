@@ -1,13 +1,8 @@
 package lk.ac.mrt.cse.dbs.simpleexpensemanager.data.impl;
-//import android.content.ContentValues;
 import android.content.Context;
-//import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-//import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.Account;
-//import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.ExpenseType;
-//import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.Transaction;
 
 
 public class DBHandler extends SQLiteOpenHelper {
@@ -31,17 +26,14 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String EXPENSE_TYPE = "expenseType";
     public static final String AMOUNT = "amount";
 
-    // creating a constructor for our database handler.
+
     public DBHandler(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // on below line we are creating
-        // an sqlite query and we are
-        // setting our column names
-        // along with their data types.
+
         String query1 = "CREATE TABLE " + TABLE_NAME_1 + " ("
                 + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + ACCOUNT_NO + " TEXT NOT NULL,"
