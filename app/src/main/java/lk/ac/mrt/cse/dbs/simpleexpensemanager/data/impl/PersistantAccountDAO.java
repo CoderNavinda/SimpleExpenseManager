@@ -178,18 +178,17 @@ public class PersistantAccountDAO implements AccountDAO {
 
         ContentValues values = new ContentValues();
         switch (expenseType) {
-            case EXPENSE:
-                values.put(BALANCE, balance - amount);
-                break;
             case INCOME:
-                values.put(BALANCE, balance + amount);
+                values.put(BALANCE, balance+amount);
+                break;
+            case EXPENSE:
+                values.put(BALANCE, balance-amount);
                 break;
         }
 
 
-        // updating row
-        db.update(TABLE_NAME_1, values, ACCOUNT_NO + " = ?",
-                new String[] { accountNo });
+        String[] up = { accountNo };
+        db.update(TABLE_NAME_1, values, ACCOUNT_NO + " = ?", up);
 
         cursor.close();
         db.close();

@@ -61,8 +61,8 @@ public class PersistantTransactionDAO implements TransactionDAO {
         while(cur.moveToNext()) {
             String date = cur.getString(cur.getColumnIndex(DATE));
             Date datef = new SimpleDateFormat("dd-MM-yyyy").parse(date); //exception handled over here
-            String accountNO= cur.getString(cur.getColumnIndex(ACCOUNT_NO_2));
-            String expensetype_ = cur.getString(cur.getColumnIndex(EXPENSE_TYPE));
+            String accountNO= cur.getString(cur.getColumnIndexOrThrow(ACCOUNT_NO_2));
+            String expensetype_ = cur.getString(cur.getColumnIndexOrThrow(EXPENSE_TYPE));
             ExpenseType expense_Type = ExpenseType.valueOf(expensetype_);
             double amount = cur.getDouble(cur.getColumnIndex(AMOUNT));
             Transaction transaction = new Transaction(datef,accountNO,expense_Type,amount);
@@ -100,7 +100,7 @@ public class PersistantTransactionDAO implements TransactionDAO {
         while(cur.moveToNext()) {
             String date = cur.getString(cur.getColumnIndex(DATE));
             Date datef = new SimpleDateFormat("dd-MM-yyyy").parse(date);
-            String accountNO= cur.getString(cur.getColumnIndex(ACCOUNT_NO_2));
+            String accountNO= cur.getString(cur.getColumnIndexOrThrow(ACCOUNT_NO_2));
             String expensetype_ = cur.getString(cur.getColumnIndex(EXPENSE_TYPE));
             ExpenseType expense_Type = ExpenseType.valueOf(expensetype_);
             double amount = cur.getDouble(cur.getColumnIndex(AMOUNT));
@@ -108,7 +108,7 @@ public class PersistantTransactionDAO implements TransactionDAO {
 
             transac.add(transaction);
         }
-
+        cur.close();
         if (size <= limit) {
             return transac;
         }

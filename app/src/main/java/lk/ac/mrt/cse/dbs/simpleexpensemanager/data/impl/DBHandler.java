@@ -21,8 +21,8 @@ public class DBHandler extends SQLiteOpenHelper {
     //transactions table
     public static final String TABLE_NAME_2 = "transactions";
     public static final String ID_COL_2 = "id";
-    public static final String DATE = "date";
     public static final String ACCOUNT_NO_2 = "accountNO";
+    public static final String DATE = "date";
     public static final String EXPENSE_TYPE = "expenseType";
     public static final String AMOUNT = "amount";
 
@@ -35,17 +35,17 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         String query1 = "CREATE TABLE " + TABLE_NAME_1 + " ("
-                + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + ACCOUNT_NO + " TEXT NOT NULL,"
+                + ACCOUNT_NO + " TEXT PRIMARY KEY,"
                 + NAME + " TEXT NOT NULL,"
                 + BANK_NAME + " TEXT NOT NULL,"
                 + BALANCE + " REAL NOT NULL)";
         String query2 = "CREATE TABLE " + TABLE_NAME_2 + " ("
                 + ID_COL_2 + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + DATE + " TEXT NOT NULL,"
-                + ACCOUNT_NO_2 + " TEXT NOT NULL,"
                 + EXPENSE_TYPE + " TEXT NOT NULL,"
-                + AMOUNT + " REAL NOT NULL)";
+                + AMOUNT + " REAL NOT NULL,"
+                + ACCOUNT_NO_2 + " TEXT," +
+                "FOREIGN KEY (" + ACCOUNT_NO_2 + ") REFERENCES " + TABLE_NAME_1 + "(" + ACCOUNT_NO + "))";
 
         db.execSQL(query1);
         db.execSQL(query2);
