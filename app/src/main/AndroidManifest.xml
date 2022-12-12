@@ -17,6 +17,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="lk.ac.mrt.cse.dbs.simpleexpensemanager">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"

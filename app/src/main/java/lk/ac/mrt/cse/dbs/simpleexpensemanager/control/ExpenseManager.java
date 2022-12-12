@@ -16,7 +16,10 @@
 
 package lk.ac.mrt.cse.dbs.simpleexpensemanager.control;
 
+import android.content.Context;
+
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +31,8 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.exception.InvalidAccountExcep
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.Account;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.ExpenseType;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.Transaction;
+
+
 
 /**
  * The ExpenseManager acts as the mediator when performing transactions. This is an abstract class with an abstract
@@ -42,7 +47,10 @@ public abstract class ExpenseManager implements Serializable {
      *
      * @return
      */
+    public ExpenseManager(Context context){}
+
     public List<String> getAccountNumbersList() {
+
         return accountsHolder.getAccountNumbersList();
     }
 
@@ -57,8 +65,7 @@ public abstract class ExpenseManager implements Serializable {
      * @param amount
      * @throws InvalidAccountException
      */
-    public void updateAccountBalance(String accountNo, int day, int month, int year, ExpenseType expenseType,
-                                     String amount) throws InvalidAccountException {
+    public void updateAccountBalance(String accountNo, int day, int month, int year, ExpenseType expenseType,String amount) throws InvalidAccountException {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
         Date transactionDate = calendar.getTime();
@@ -75,7 +82,7 @@ public abstract class ExpenseManager implements Serializable {
      *
      * @return
      */
-    public List<Transaction> getTransactionLogs() {
+    public List<Transaction> getTransactionLogs() throws ParseException {
         return transactionsHolder.getPaginatedTransactionLogs(10);
     }
 
@@ -107,6 +114,7 @@ public abstract class ExpenseManager implements Serializable {
      * @param accountDAO
      */
     public void setAccountsDAO(AccountDAO accountDAO) {
+
         this.accountsHolder = accountDAO;
     }
 
@@ -116,6 +124,7 @@ public abstract class ExpenseManager implements Serializable {
      * @return
      */
     public TransactionDAO getTransactionsDAO() {
+
         return transactionsHolder;
     }
 
@@ -132,5 +141,5 @@ public abstract class ExpenseManager implements Serializable {
      * This method should be implemented by the concrete implementation of this class. It will dictate how the DAO
      * objects will be initialized.
      */
-    public abstract void setup() throws ExpenseManagerException;
+    public abstract void setup(Context context) throws ExpenseManagerException;
 }
